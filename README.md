@@ -1,14 +1,31 @@
 # freitag
 
-A Clojure library designed to ... well, that part is up to you.
+A clojure library for public holidays.
+Currently, only contains entries for Germany (2021, 2022)
 
 ## Usage
 
-FIXME
+``` clojure
+(require '[freitag.core :refer [query]])
+
+;; All public holidays for January 2021 for the whole country
+(query {:country :de
+          :year 2021
+          :month 1})
+=>  ({:name "Neujahr", :month 1, :day 1})
+
+;; All public holidays for January 2021 for the state "Baden-Wuerttemberg"
+(query {:country :de
+          :year 2021
+          :month 1
+          :state :bw})
+=>  ({:name "Neujahr", :month 1, :day 1}
+     {:name "Heilige drei Könige", :month 1, :day 6, :states #{:st :bw :by}})                    
+```
 
 ## License
 
-Copyright © 2021 FIXME
+Copyright © 2021 lambdaschmiede GmbH
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
