@@ -1,0 +1,67 @@
+#{{:name "Neujahr"
+   :month 1
+   :day 1}
+  {:name "Heilige drei Könige"
+   :month 1
+   :day 6
+   :states #{:bw :by :st}}
+  {:name "Internationaler Frauentag"
+   :month 3
+   :day 8
+   :states #{:be}}
+  {:name "Karfreitag"
+   :month 4
+   :day 2}
+  {:name "Ostersonntag"
+   :month 4
+   :day 4
+   :states #{:br}}
+  {:name "Ostermontag"
+   :month 4
+   :day 5}
+  {:name "Tag der Arbeit"
+   :month 5
+   :day 1}
+  {:name "Christi Himmelfahrt"
+   :month 5
+   :day 13}
+  {:name "Pfingstsonntag"
+   :month 5
+   :day 23
+   :states #{:br}}
+  {:name "Pfingstmontag"
+   :month 5
+   :day 24}
+  {:name "Fronleichnam"
+   :month 6
+   :day 3
+   :states #{:bw :by :he :nw :rp :sl :sn :th}}
+  {:name "Mariä Himmelfahrt"
+   :month 8
+   :day 15
+   :states #{:sl :by}}
+  {:name "Weltkindertag"
+   :month 9
+   :day 20
+   :states #{:th}}
+  {:name "Tag der deutschen Einheit"
+   :month 10
+   :day 3}
+  {:name "Reformationstag"
+   :month 10
+   :day 31
+   :states #{:br :hb :hh :mv :ni :sn :st :sh :th}}
+  {:name "Allerheiligen"
+   :month 11
+   :day 1
+   :states #{:bw :by :nw :rp :sl}}
+  {:name "Buß- und Bettag"
+   :month 11
+   :day 17
+   :states #{:sn}}
+  {:name "1. Weihnachtsfeiertag"
+   :month 12
+   :day 25}
+  {:name "2. Weihnachtsfeiertag"
+   :month 12
+   :day 26}}
