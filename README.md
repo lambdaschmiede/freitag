@@ -1,5 +1,7 @@
 # freitag
 
+[![Clojars Project](https://img.shields.io/clojars/v/com.lambdaschmiede/freitag.svg)](https://clojars.org/com.lambdaschmiede/freitag)
+
 A clojure library for public holidays.
 Currently, only contains entries for Germany (2021, 2022)
 
