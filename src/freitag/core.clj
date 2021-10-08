@@ -1,8 +1,7 @@
 (ns freitag.core
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io])
-  (:import (java.nio.file Path Files FileSystems Paths)
-           (java.net URI)))
+  (:import (java.nio.file Path Files FileSystems Paths)))
 
 (def root-path "com/lambdaschmiede/freitag")
 
@@ -11,19 +10,10 @@
   [^Path path]
   (.endsWith (.toString path) ".edn"))
 
-(defn- path-from-uri
-  "When working on the library, the resource files are treated as files"
-  [^URI uri]
-  (Paths/get uri))
+(defn- list-files-for-path [^Path path]
+  (filter is-edn-file (iterator-seq (.iterator (Files/walk path (into-array java.nio.file.FileVisitOption []))))))
 
-(defn- path-from-fs
-  "When referencing the packed JAR, the resources need to be handled from inside the zip
-  which requires special treatment"
-  [^URI uri]
-  (.getPath (FileSystems/newFileSystem uri {})
-            root-path (into-array java.lang.String [])))
-
-(defn read-file
+(defn- read-file
   "Reads the EDN from the file at the given path. Extracts country and year from the path structure"
   [^Path path]
   (let [[country year] (->> path
@@ -34,14 +24,18 @@
      {(Integer/parseInt (subs (.toString year) 0 4))
       (clojure.edn/read-string (slurp (Files/newInputStream path (into-array java.nio.file.OpenOption []))))}}))
 
+(defn- load-from-path [^Path path]
+  (apply (partial merge-with merge)
+         (->> path
+              (list-files-for-path)
+              (map read-file))))
+
 (defn- load-all []
-  (let [uri (.toURI (io/resource root-path))
-        path (if (= "jar" (.getScheme uri))
-               (path-from-fs uri)
-               (path-from-uri uri))
-        all-edn-files (filter is-edn-file (iterator-seq (.iterator (Files/walk path (into-array java.nio.file.FileVisitOption [])))))]
-    (apply (partial merge-with merge)
-           (map read-file all-edn-files))))
+  (let [uri (.toURI (io/resource root-path))]
+    (if (= "jar" (.getScheme uri))
+      (with-open [fs (FileSystems/newFileSystem uri {})]
+        (load-from-path (.getPath fs root-path (into-array java.lang.String []))))
+      (load-from-path (Paths/get uri))  )))
 
 (defonce vacations (load-all))
 
