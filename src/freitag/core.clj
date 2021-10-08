@@ -5,13 +5,13 @@
 
 (def root-path "com/lambdaschmiede/freitag")
 
-(defn- is-edn-file
+(defn- is-edn-file?
   "Checks if the path points to an EDN file. There might be a better way to do this"
   [^Path path]
   (.endsWith (.toString path) ".edn"))
 
 (defn- list-files-for-path [^Path path]
-  (filter is-edn-file (iterator-seq (.iterator (Files/walk path (into-array java.nio.file.FileVisitOption []))))))
+  (filter is-edn-file? (iterator-seq (.iterator (Files/walk path (into-array java.nio.file.FileVisitOption []))))))
 
 (defn- read-file
   "Reads the EDN from the file at the given path. Extracts country and year from the path structure"
