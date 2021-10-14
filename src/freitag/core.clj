@@ -37,12 +37,12 @@
         (load-from-path (.getPath fs root-path (into-array java.lang.String []))))
       (load-from-path (Paths/get uri))  )))
 
-(defonce vacations (load-all))
+(def vacations (delay (load-all)))
 
 (defn query
   "Queries for vacation days for the given country, year, month, and (optional) state"
   [{:keys [country year month state]}]
-  (->> (-> vacations
+  (->> (-> @vacations
            (get country)
            (get year))
        (filter #(= month (:month %)))
