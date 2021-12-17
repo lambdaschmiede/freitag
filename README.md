@@ -3,7 +3,7 @@
 [![Clojars Project](https://img.shields.io/clojars/v/com.lambdaschmiede/freitag.svg)](https://clojars.org/com.lambdaschmiede/freitag)
 
 A clojure library for public holidays.
-Currently, only contains entries for Germany (2021, 2022)
+Currently, only contains entries for Germany (2021, 2022, 2023)
 
 ## Usage
 
@@ -14,15 +14,23 @@ Currently, only contains entries for Germany (2021, 2022)
 (query {:country :de
           :year 2021
           :month 1})
-=>  ({:name "Neujahr", :month 1, :day 1})
+=>  ({:name "Neujahr", :month 1, :day 1, :year 2021})
 
 ;; All public holidays for January 2021 for the state "Baden-Wuerttemberg"
 (query {:country :de
           :year 2021
           :month 1
           :state :bw})
-=>  ({:name "Neujahr", :month 1, :day 1}
-     {:name "Heilige drei Könige", :month 1, :day 6, :states #{:st :bw :by}})                    
+=>  ({:name "Neujahr", :month 1, :day 1, :year 2021}
+     {:name "Heilige drei Könige", :month 1, :day 6, :year 2021, :states #{:st :bw :by}})
+     
+;; All german holidays in January for the years 2021, 2022, 2023
+(query {:country :de
+          :month 1
+          :year [2021 2022 2023]})
+=>  ({:name "Neujahr", :month 1, :day 1, :year 2021}
+     {:name "Neujahr", :month 1, :day 1, :year 2022}
+     {:name "Neujahr", :month 1, :day 1, :year 2023})
 ```
 
 ## License
