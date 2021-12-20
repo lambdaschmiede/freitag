@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
-## 0.1.4 - 2021-12-17
+## 0.1.4 - 2021-12-20
 - Enable searching for multiple years
 - Make month parameter in query optional
 - Add year of each holiday to return values
